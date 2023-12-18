@@ -1,0 +1,22 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: M@lik8872
+      MYSQL_DATABASE: todolist
+      MYSQL_USER: saqib
+      MYSQL_PASSWORD: root
+    ports:
+      - "3306:3306"
+
+  spring-boot-app:
+    image: springserver:latest
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/todolist
+      SPRING_DATASOURCE_USERNAME: saqib
+      SPRING_DATASOURCE_PASSWORD: root
